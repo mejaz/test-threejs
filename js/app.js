@@ -1,4 +1,4 @@
-var scene, camera, renderer;
+var scene, camera, renderer, box;
 
 init();
 
@@ -7,12 +7,29 @@ function init() {
     scene.background = new THREE.Color(0xaaaaaa)
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({
-        color: new THREE.Color('red')
+    const material = new THREE.MeshStandardMaterial({
+        color: new THREE.Color('skyblue')
     });
-    const box = new THREE.Mesh(geometry, material);
+    box1 = new THREE.Mesh(geometry, material);
+    box1.position.y = -1.5;
+    scene.add(box1);
 
-    scene.add(box);
+    box2 = new THREE.Mesh(geometry, material);
+    box2.position.x = -1.5;
+    scene.add(box2);
+
+    box3 = new THREE.Mesh(geometry, material);
+    box3.position.x = 1.5;
+    scene.add(box3);
+
+    box4 = new THREE.Mesh(geometry, material);
+    box4.position.y = +1.5;
+    scene.add(box4);
+    
+
+    const light = new THREE.PointLight();
+    light.position.set(0, 1, 2)
+    scene.add(light)
 
     camera = new THREE.PerspectiveCamera(
         75,
@@ -39,5 +56,9 @@ function onResize() {
 
 function update() {
     requestAnimationFrame(update);
+    box1.rotation.x += 0.01
+    box2.rotation.y -= 0.01
+    box3.rotation.y += 0.01
+    box4.rotation.x -= 0.01
     renderer.render(scene, camera);
 }
