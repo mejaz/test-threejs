@@ -12,6 +12,8 @@ function init() {
         1000
     )
 
+    camera.position.z = 5;
+
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
